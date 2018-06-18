@@ -12,11 +12,12 @@ class Album extends Component {
     this.state = {
       album: album,
       currentSong: album.songs[0],
-      isPlaying: false
+      isPlaying: false,
     };
 
     this.audioElement = document.createElement('audio');
     this.audioElement.src = album.songs[0].audioSrc;
+    this.songIcon = document.getElementByTag
   }
 
   play() {
@@ -34,15 +35,28 @@ class Album extends Component {
     this.setState({currentSong: song});
   }
 
-  handleSongClick(song) {
+  handleSongClick(song, index) {
     const isSameSong = this.state.currentSong === song;
     if (this.state.isPlaying && isSameSong) {
       this.pause();
+      document.getElementsByTagName('i')[index].className = 'icon ion-md-play';
     } else {
       if (!isSameSong) { this.setSong(song); };
       this.play();
+      document.getElementsByTagName('i')[index].className = 'icon ion-md-pause';
     }
   }
+
+  handleSongMouseEnter(index) {
+    if (document.getElementsByTagName('i')[index].className === '')
+      document.getElementsByTagName('i')[index].className = 'icon ion-md-play';
+  }
+
+  handleSongMouseLeave(index) {
+    this.pause();
+    document.getElementsByTagName('i')[index].className = '';
+  }
+
     render() {
       return (
         <section className="album">
@@ -63,10 +77,14 @@ class Album extends Component {
             <tbody>
               {
                 this.state.album.songs.map( ( song, index ) =>
-                  <tr className="song" key={index} onClick={() => this.handleSongClick(song)}>
-                    <td>{index+1}</td>
-                    <td>{song.title}</td>
-                    <td>{song.duration}</td>
+                  <tr className="song" key={index}>
+                    <span onMouseEnter={() => this.handleSongMouseEnter(index)}
+                          onMouseLeave={() => this.handleSongMouseLeave(index)}>
+                      <i className={this.state.icon} onClick={() => this.handleSongClick(song, index)}></i>
+                      <td>{index+1}</td>
+                      <td>{song.title}</td>
+                      <td>{song.duration}</td>
+                    </span>
                   </tr>
               )
               }
