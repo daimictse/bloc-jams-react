@@ -34,26 +34,31 @@ class Album extends Component {
     this.setState({currentSong: song});
   }
 
+  setSongIcon(index, icon) {
+    document.getElementById('song-list').getElementsByTagName('span')[index].className = icon;
+  }
+
   handleSongClick(song, index) {
     const isSameSong = this.state.currentSong === song;
     if (this.state.isPlaying && isSameSong) {
       this.pause();
-      document.getElementsByTagName('i')[index].className = 'icon ion-md-play';
+      this.setSongIcon(index, 'icon ion-md-play');
     } else {
       if (!isSameSong) { this.setSong(song); };
       this.play();
-      document.getElementsByTagName('i')[index].className = 'icon ion-md-pause';
+      this.setSongIcon(index, 'icon ion-md-pause');
     }
   }
 
   handleSongMouseEnter(index) {
-    if (document.getElementsByTagName('i')[index].className === '')
-      document.getElementsByTagName('i')[index].className = 'icon ion-md-play';
+    if (this.state.isPlaying)
+      this.setSongIcon(index, "icon ion-md-pause");
+    else
+      this.setSongIcon(index, "icon ion-md-play");
   }
 
   handleSongMouseLeave(index) {
-    this.pause();
-    document.getElementsByTagName('i')[index].className = '';
+      this.setSongIcon(index, "");
   }
 
     render() {
@@ -76,14 +81,13 @@ class Album extends Component {
             <tbody>
               {
                 this.state.album.songs.map( ( song, index ) =>
-                  <tr className="song" key={index}>
-                    <span onMouseEnter={() => this.handleSongMouseEnter(index)}
+                  <tr className="song" key={index} onClick={() => this.handleSongClick(song, index)}
+                          onMouseEnter={() => this.handleSongMouseEnter(index)}
                           onMouseLeave={() => this.handleSongMouseLeave(index)}>
-                      <i className={this.state.icon} onClick={() => this.handleSongClick(song, index)}></i>
-                      <td>{index+1}</td>
+                      <td><span className=""></span>
+                          {index+1}</td>
                       <td>{song.title}</td>
                       <td>{song.duration}</td>
-                    </span>
                   </tr>
               )
               }
