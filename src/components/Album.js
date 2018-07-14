@@ -36,10 +36,6 @@ class Album extends Component {
     this.setState({currentSong: song});
   }
 
-  setSongIcon(index, icon) {
-    //document.getElementById('song-list').getElementsByTagName('span')[index].className = icon;
-  }
-
   handleSongClick(song, index) {
     const isSameSong = this.state.currentSong === song;
     if (this.state.isPlaying && isSameSong) {
