@@ -1,0 +1,68 @@
+body {
+  font-family: fantasy, Courier, monospace;
+  background: url('https://speechfoodie.com/gallery/335/img/cdn.wallpapersafari.com/50/35/8LJoH6.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: white;
+}
+
+header {
+  text-align: left;
+}
+
+a {
+  text-decoration: none;
+}
+
+header a {
+  padding: 20px;
+  color: white;
+}
+
+header h1 {
+  text-align: center;
+  font-size: 10vw;
+  margin-bottom: 50px;
+}
+
+.hero-title {
+  font-size: 4vw;
+  color: aqua;
+}
+.custom-ion {
+  font-size: 2.2vw;
+  padding: 10px;
+  color: aqua;
+}
+
+.library a {
+  padding: 50px;
+  display: inline-block;
+}
+
+.library a div {
+  color: white;
+}
+
+.library a img {
+  width: 250px;
+}
+
+#album-info {
+  float: left;
+}
+
+#album-info img {
+  width: 40%;
+  padding: 0 20px;
+}
+
+#song-list {
+  margin: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#time-control {
+  padding-bottom: 20px;
+}
